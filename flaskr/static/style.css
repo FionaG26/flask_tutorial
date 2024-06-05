@@ -1,3 +1,37 @@
+.video-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.video-section h2 {
+    color: #333;
+}
+
+.video-section a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.video-section a:hover {
+    background-color: #0056b3;
+}
+
+/* CSS for followers and subscribers */
+.followers-subscribers {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.followers-subscribers p {
+    color: #333;
+    margin-bottom: 5px;
+}
+
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background-color: #000;
@@ -35,7 +69,7 @@ nav a:hover {
 .content {
     max-width: 1200px;
     margin: 20px auto;
-    background: #333;
+    background: #FFFFFF;
     padding: 20px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     border-radius: 8px;
