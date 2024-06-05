@@ -3,10 +3,10 @@ body {
     color: #fff;
     margin: 0;
     padding: 0;
-    background-image: url('path/to/your/image.png'), 
-                      url('path/to/your/image2.png'),
-                      url('path/to/your/image3.png'),
-                      url('path/to/your/image4.png');
+    background-image: url('static/images/image.png'), 
+                      url('static/images/image2.png'),
+                      url('static/images/image3.png'),
+                      url('static/images/image4.png');
     background-repeat: repeat; /* This property makes the background image tile */
     background-size: cover;
 }
