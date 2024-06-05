@@ -11,6 +11,61 @@ body {
     background-repeat: repeat;
 }
 
+.block-articles {
+    margin-bottom: 40px;
+}
+
+.block-articles__heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+    gap: 20px;
+}
+
+.article-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.article-card__image-link {
+    display: block;
+    overflow: hidden;
+}
+
+.article-card__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.article-card__content {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.article-card__title {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.article-card__category {
+    color: #888;
+    font-size: 14px;
+}
+
+.article-card__author {
+    color: #888;
+    font-size: 14px;
+}
+
+
 nav {
     background-color: #333;
     color: white;
