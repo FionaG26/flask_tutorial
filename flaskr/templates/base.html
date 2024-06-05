@@ -27,38 +27,8 @@
         {% for message in get_flashed_messages() %}
             <div class="flash">{{ message }}</div>
         {% endfor %}
-        <div class="row">
-            {% block content %}
-                <!-- Sample article block -->
-                <div class="block-articles">
-                    <h2 class="block-articles__heading">Technology</h2>
-                    <div class="posts-grid container">
-                        <!-- First Article -->
-                        <div class="article-card block">
-                            <a class="article-card__image-link" href="#">
-                                <img class="article-card__image" src="https://via.placeholder.com/245" alt="Sample Image">
-                            </a>
-                            <div class="article-card__content">
-                                <h3 class="article-card__title">
-                                    <a class="article-card__title-link" href="#">Sample Article Title</a>
-                                </h3>
-                                <span class="article-card__category">#SampleCategory</span>
-                                <span class="article-card__author">by <a href="#">Sample Author</a></span>
-                                <div class="article-card__tags">
-                                    <span class="tag">Tag 1</span>
-                                    <span class="tag">Tag 2</span>
-                                    <!-- Add more tags if needed -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add more articles here -->
-                    </div>
-                    <div class="block-articles__button-wrapper">
-                        <a class="block-button primary" href="#">View More Articles</a>
-                    </div>
-                </div>
-            {% endblock %}
-        </div>
+        {% block content %}
+        {% endblock %}
     </div>
     
     <footer class="footer">
