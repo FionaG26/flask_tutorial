@@ -70,3 +70,48 @@ footer {
     width: 100%;
 }
 
+/* Additions for the form in create.html */
+.form-group label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #0073b1;
+    border-color: #0073b1;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-warning {
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+input.form-control,
+textarea.form-control,
+select.form-control {
+    border-radius: 0;
+    border: 1px solid #ced4da;
+}
+
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+    box-shadow: none;
+    border-color: #0073b1;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+.d-flex.justify-content-between {
+    margin-top: 20px;
+}
+
+.container.mt-5 {
+    margin-top: 50px;
+}
