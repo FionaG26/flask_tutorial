@@ -6,6 +6,80 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles specific to this page */
+        .block-articles {
+            margin-bottom: 40px;
+        }
+
+        .block-articles__heading {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+            gap: 20px;
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .article-card__image-link {
+            display: block;
+            overflow: hidden;
+        }
+
+        .article-card__image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .article-card__content {
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .article-card__title {
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        .article-card__category {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .article-card__author {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .article-card__tags {
+            margin-top: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .tag:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <nav class="nav">
@@ -28,7 +102,36 @@
             <div class="flash">{{ message }}</div>
         {% endfor %}
         <div class="row">
-            {% block content %}{% endblock %}
+            {% block content %}
+                <!-- Sample article block -->
+                <div class="block-articles block-articles--travel-inspo">
+                    <h2 class="block-articles__heading">Time for Canada?</h2>
+                    <div class="posts-grid container">
+                        <!-- First Article -->
+                        <div class="article-card block">
+                            <a class="article-card__image-link" href="#">
+                                <img class="article-card__image" src="https://via.placeholder.com/245" alt="Sample Image">
+                            </a>
+                            <div class="article-card__content">
+                                <h3 class="article-card__title">
+                                    <a class="article-card__title-link" href="#">Sample Article Title</a>
+                                </h3>
+                                <span class="article-card__category">#SampleCategory</span>
+                                <span class="article-card__author">by <a href="#">Sample Author</a></span>
+                                <div class="article-card__tags">
+                                    <span class="tag">Tag 1</span>
+                                    <span class="tag">Tag 2</span>
+                                    <!-- Add more tags if needed -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more articles here -->
+                    </div>
+                    <div class="block-articles__button-wrapper">
+                        <a class="block-button primary" href="#">View More Articles</a>
+                    </div>
+                </div>
+            {% endblock %}
         </div>
     </div>
     
