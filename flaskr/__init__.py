@@ -8,6 +8,11 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+    
+    # Configuration for serving static files
+    app.config['STATIC_FOLDER'] = 'static'
+    app.config['STATIC_URL_PATH'] = '/static'
+
 
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
