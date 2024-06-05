@@ -34,9 +34,9 @@
         <div class="card mb-4">
           <img src="{{ url_for('static', filename='images/another_image.jpg') }}" class="card-img-top" alt="Another Post Image">
           <div class="card-body">
-            <h5 class="card-title">Another Title for {{ post.title }}</h5>
-            <p class="card-text">Additional content related to the post...</p>
-            <small class="text-muted">Additional info for {{ post.username }}</small>
+            <h5 class="card-title"> {{ post.title }}</h5>
+            <p class="card-text">{{ post.body[:100] }}...</p>
+            <small class="text-muted">by {{ post.username }} on {{ post.created }}</small>
             <div class="d-flex justify-content-between align-items-center mt-3">
               <a href="#" class="btn btn-primary btn-sm">Learn More</a>
               {% if g.user and g.user.id == post.author_id %}
@@ -57,9 +57,9 @@
         <div class="card mb-4">
           <img src="{{ url_for('static', filename='images/third_image.jpg') }}" class="card-img-top" alt="Third Post Image">
           <div class="card-body">
-            <h5 class="card-title">Third Title for {{ post.title }}</h5>
-            <p class="card-text">More content related to the post...</p>
-            <small class="text-muted">More info for {{ post.username }}</small>
+            <h5 class="card-title"> {{ post.title }}</h5>
+            <p class="card-text">{{ post.body[:100] }}...</p>
+            <small class="text-muted">by {{ post.username }} on {{ post.created }}</small>
             <div class="d-flex justify-content-between align-items-center mt-3">
               <a href="#" class="btn btn-primary btn-sm">Discover More</a>
               {% if g.user and g.user.id == post.author_id %}
@@ -80,9 +80,9 @@
         <div class="card mb-4">
           <img src="{{ url_for('static', filename='images/fourth_image.jpg') }}" class="card-img-top" alt="Fourth Post Image">
           <div class="card-body">
-            <h5 class="card-title">Fourth Title for {{ post.title }}</h5>
-            <p class="card-text">Even more content related to the post...</p>
-            <small class="text-muted">Extra info for {{ post.username }}</small>
+            <h5 class="card-title"> {{ post.title }}</h5>
+            <p class="card-text">{{ post.body[:100] }}...</p>
+            <small class="text-muted">by {{ post.username }} on {{ post.created }}</small>
             <div class="d-flex justify-content-between align-items-center mt-3">
               <a href="#" class="btn btn-primary btn-sm">Find Out More</a>
               {% if g.user and g.user.id == post.author_id %}
