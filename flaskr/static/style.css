@@ -1,13 +1,13 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #000; /* Change background color to black */
-    color: #fff; /* Change text color to white */
+    background-color: #000;
+    color: #fff;
     margin: 0;
     padding: 0;
 }
 
 nav {
-    background-color: #333; /* Change nav background color to dark gray */
+    background-color: #333;
     color: white;
     padding: 10px;
     display: flex;
@@ -35,39 +35,42 @@ nav a:hover {
 .content {
     max-width: 1200px;
     margin: 20px auto;
-    background: #333; /* Change content background color to dark gray */
+    background: #333;
     padding: 20px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* Update box shadow color */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     border-radius: 8px;
 }
 
 .flash {
     padding: 10px;
     margin-bottom: 20px;
-    background-color: #444; /* Change flash background color to darker gray */
-    color: #f00; /* Change flash text color to red */
-    border: 1px solid #f00; /* Update border color */
+    background-color: #444;
+    color: #f00;
+    border: 1px solid #f00;
     border-radius: 4px;
 }
 
 .card {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
-    background-color: #222; /* Change card background color to very dark gray */
+    background-color: #222;
     margin: 10px;
 }
 
 .card-header {
-    background-color: #333; /* Change card header background color to dark gray */
-    border-bottom: 1px solid #555; /* Update border color */
+    background-color: #333;
+    border-bottom: 1px solid #555;
 }
 
 .footer {
     text-align: center;
     padding: 20px;
-    background-color: #333; /* Change footer background color to dark gray */
+    background-color: #333; /* Update footer background color to dark gray */
     color: white;
     width: 100%;
+    position: fixed; /* Ensure the footer sticks to the bottom */
+    bottom: 0; /* Position the footer at the bottom of the viewport */
+    left: 0; /* Align the footer to the left edge */
 }
 
 .container.mt-5 {
