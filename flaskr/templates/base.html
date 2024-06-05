@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -22,6 +22,19 @@
             {% endif %}
         </div>
     </nav>
+
+    <!-- Video Section -->
+    <div class="video-section">
+        <h2>Featured Video</h2>
+        <a href="path/to/your/video.mp4" target="_blank">Watch Video</a>
+    </div>
+
+    <!-- Followers and Subscribers -->
+    <div class="followers-subscribers">
+        <p>Followers: 1000</p>
+        <p>Subscribers: 500</p>
+    </div>
+
     <div class="content">
         {% for message in get_flashed_messages() %}
             <div class="flash">{{ message }}</div>
@@ -30,9 +43,11 @@
             {% block content %}{% endblock %}
         </div>
     </div>
-   <footer class="footer">
-    <p>&copy; 2024 Software Engineering Blog</p>
+    
+    <footer class="footer">
+        <p>&copy; 2024 Software Engineering Blog</p>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
