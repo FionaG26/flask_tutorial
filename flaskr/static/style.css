@@ -1,6 +1,6 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #fff;
+    color: #7B3F00;
     margin: 0;
     padding: 0;
     background-image: 
@@ -11,82 +11,9 @@ body {
     background-repeat: repeat;
 }
 
-.block-articles {
-    margin-bottom: 40px;
-}
-
-.block-articles__heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
-    gap: 20px;
-}
-
-.article-card {
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.article-card__image-link {
-    display: block;
-    overflow: hidden;
-}
-
-.article-card__image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.article-card__content {
-    padding: 20px;
-    background-color: #fff;
-}
-
-.article-card__title {
-    font-size: 18px;
-    margin-top: 0;
-}
-
-.article-card__category {
-    color: #888;
-    font-size: 14px;
-}
-
-.article-card__author {
-    color: #888;
-    font-size: 14px;
-}
-
-.article-card__tags {
-    margin-top: 10px;
-}
-
-.tag {
-    display: inline-block;
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-
-.tag:hover {
-    background-color: #e0e0e0;
-}
-
 
 nav {
-    background-color: #333;
+    background-color: #7B3F00;
     color: white;
     padding: 10px;
     display: flex;
@@ -134,17 +61,18 @@ nav a:hover {
     border-radius: 8px;
     background-color: #222;
     margin: 10px;
+    color: #FFFFFF;
 }
 
 .card-header {
-    background-color: #333;
+    background-color: #7B3F00;
     border-bottom: 1px solid #555;
 }
 
 .footer {
     text-align: center;
     padding: 20px;
-    background-color: #333; /* Update footer background color to dark gray */
+    background-color: #7B3F00; /* Update footer background color to dark gray */
     color: white;
     width: 100%;
     position: fixed; /* Ensure the footer sticks to the bottom */
