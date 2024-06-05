@@ -8,8 +8,7 @@ body {
         url('/static/images/image2.png'),
         url('/static/images/image3.png'),
         url('/static/images/image4.png');
-    background-repeat: repeat; /* This property makes the background image tile */
-    background-size: cover;
+    background-repeat: repeat;
 }
 
 nav {
