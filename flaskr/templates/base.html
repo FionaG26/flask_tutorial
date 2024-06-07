@@ -58,7 +58,7 @@
     {% endfor %}
     {% block content %}
         <div class="tm-home-img-container">
-            <img src="images/tm-home-img.jpg" alt="Image" class="hidden-lg-up img-fluid">
+            <img src="{{ url_for('static', filename='images/tm-home-img.jpg') }}" alt="Image" class="hidden-lg-up img-fluid">
         </div>
 
         <section class="tm-section">
