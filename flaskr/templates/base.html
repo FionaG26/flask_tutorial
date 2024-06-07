@@ -52,11 +52,7 @@
         </div>
     </nav>
 
-    <div class="content">
-        {% for message in get_flashed_messages() %}
-            <div class="flash">{{ message }}</div>
-        {% endfor %}
-        {% block content %}
+
             <div class="tm-home-img-container">
                 <img src="{{ url_for('static', filename='images/tm-home-img.jpg') }}" alt="Image" class="hidden-lg-up img-fluid">
             </div>
