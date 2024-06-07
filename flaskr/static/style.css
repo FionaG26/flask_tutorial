@@ -96,6 +96,7 @@ button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: #fff;
+    transition: box-shadow 0.3s ease;
 }
 
 .card-header {
@@ -106,6 +107,24 @@ button:hover {
 .card-body {
     padding: 20px;
 }
+
+.card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add larger shadow on hover */
+    }
+
+.card-title {
+        font-size: 1.25rem; /* Increase font size for card titles */
+        margin-bottom: 0.75rem; /* Add some bottom margin */
+    }
+
+.card-text {
+        color: #666; /* Change text color of card text */
+    }
+
+.text-muted {
+        color: #999; /* Change text color of muted text */
+    }
+
 
 .form-group {
     margin-bottom: 20px;
@@ -140,5 +159,9 @@ select {
 
 .btn-warning {
         background-color: orange;
+
+.mb-4 {
+        margin-bottom: 1.5rem;
+    }
         color: white;
     }
