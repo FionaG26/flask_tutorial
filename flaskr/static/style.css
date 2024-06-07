@@ -128,24 +128,8 @@ select {
     font-size: 16px;
 }
 
-button[type="submit"],
-button[type="button"] {
-    padding: 12px 20px;
-    background-color: #0073b1;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover,
-button[type="button"]:hover {
-    background-color: #005a8d;
-}
-
 .btn-primary {
-        background-color: blue;
+    background-color: blue;
         color: white;
 }
 
