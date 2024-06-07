@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Software Engineering{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}{% endblock %} - Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> 
 </head>
 <body>
-    <div class="tm-header">
-        <div class="container-fluid">
-            <div class="tm-header-inner">
-                <a href="{{ url_for('home') }}" class="navbar-brand tm-site-name">Software Engineering</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('blog.home') }}">Software Engineering</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
                 {% if g.user %}
-                    <a href="{{ url_for('blog.index') }}">Home</a>
-                    <a href="{{ url_for('blog.create') }}">Create</a>
-                    <a href="{{ url_for('auth.logout') }}">Logout</a>
-                    <p>Logged in as {{ g.user.username }}</p>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('blog.index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('blog.create') }}">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="navbar-text">Logged in as {{ g.user.username }}</span>
+                    </li>
                 {% else %}
-                    <a href="{{ url_for('auth.register') }}">Register</a>
-                    <a href="{{ url_for('auth.login') }}">Login</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
                 {% endif %}
-            </div>
+            </ul>
         </div>
-    </div>
+    </nav>
 
-    <div class="content">
+    <div class="container mt-4">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
         {% block content %}
-        <div class="tm-home-img-container">
-            <img src="{{ url_for('static', filename='img/tm-home-img.jpg') }}" alt="Image" class="hidden-lg-up img-fluid">
-        </div>
-
-        <section class="tm-section">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-xs-center">
-                        <h2 class="tm-gold-text tm-title">Python Queen</h2>
-                        <p class="tm-subtitle">Python is life</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <img src="{{ url_for('static', filename='img/tm-img-310x180-1.jpg') }}" alt="Image" class="tm-margin-b-20 img-fluid">
-                            <h4 class="tm-margin-b-20 tm-gold-text">Lorem ipsum dolor #1</h4>
-                            <p class="tm-margin-b-20">Aenean cursus tellus mauris, quis consequat mauris dapibus id. Donec scelerisque porttitor pharetra</p>
-                            <a href="#" class="tm-btn text-uppercase">Detail</a>
-                        </div>
-                    </div>
-                    <!-- Add more content boxes as needed -->
-                </div>
-            </div>
-        </section>
         {% endblock %}
     </div>
+    
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">&copy; 2024 Software Engineering Blog</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
