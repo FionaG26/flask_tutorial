@@ -7,6 +7,10 @@ from flaskr.db import get_db
 
 bp = Blueprint('blog', __name__)
 
+@bp.route('/home')
+def home():
+    return render_template('base.html')
+    
 
 @bp.route('/')
 def index():
