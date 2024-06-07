@@ -197,10 +197,18 @@ select {
 .btn-warning {
         background-color: orange;
 
+.mb-4 {
+        margin-bottom: 1.5rem;
+    }
+/* style.css */
 .footer {
   background-color: orange;
   color: white;
   padding: 30px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .footer h3 {
@@ -225,9 +233,3 @@ select {
   color: white;
   font-size: 20px;
 }
-
-.mb-4 {
-        margin-bottom: 1.5rem;
-    }
-        color: white;
-    }
