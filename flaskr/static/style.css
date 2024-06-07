@@ -143,3 +143,18 @@ button[type="submit"]:hover,
 button[type="button"]:hover {
     background-color: #005a8d;
 }
+
+.btn-primary {
+        background-color: blue;
+        color: white;
+}
+
+.btn-secondary {
+        background-color: gray;
+        color: white;
+}
+
+.btn-warning {
+        background-color: orange;
+        color: white;
+    }
