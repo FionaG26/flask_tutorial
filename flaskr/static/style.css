@@ -39,3 +39,18 @@ body {
         .content {
             padding: 20px;
         }
+
+         .card {
+        margin-top: 20px;
+    }
+    .card-header h2 {
+        color: #333;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .form-group label {
+        font-weight: bold;
+    }
+    .btn-primary, .btn-secondary, .btn-warning {
+        margin-top: 10px;
+    }
