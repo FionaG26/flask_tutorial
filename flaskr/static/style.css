@@ -9,7 +9,6 @@ body {
     background-size: cover;
 }
 
-
 a, button { transition: all 0.3s ease; }
 a:hover,
 a:focus {
