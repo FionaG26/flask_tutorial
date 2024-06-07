@@ -9,8 +9,18 @@
 </head>
 <body>
     <nav class="nav">
-        <h1>Software Engineering</h1>
+        <h1>Code Chronicles</h1>
         <div>
+            <div class="tm-header">
+            <div class="container-fluid">
+                <div class="tm-header-inner">
+                    
+                    <!-- navbar -->
+                    <nav class="navbar tm-main-nav">
+
+                        <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#tmNavbar">
+                            &#9776;
+                        </button>
             {% if g.user %}
                 <a href="{{ url_for('blog.index') }}">Home</a>
                 <a href="{{ url_for('blog.create') }}">Create</a>
