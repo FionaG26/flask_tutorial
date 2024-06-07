@@ -5,13 +5,12 @@
     <title>{% block title %}{% endblock %} - Blog</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
 </head>
 <body>
     <nav class="nav">
         <h1>Code Chronicles</h1>
-        <div>
-            <div class="tm-header">
+        <div class="tm-header">
             <div class="container-fluid">
                 <div class="tm-header-inner">
                     
@@ -21,15 +20,35 @@
                         <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#tmNavbar">
                             &#9776;
                         </button>
-            {% if g.user %}
-                <a href="{{ url_for('blog.index') }}">Home</a>
-                <a href="{{ url_for('blog.create') }}">Create</a>
-                <a href="{{ url_for('auth.logout') }}">Logout</a>
-                <p>Logged in as {{ g.user.username }}</p>
-            {% else %}
-                <a href="{{ url_for('auth.register') }}">Register</a>
-                <a href="{{ url_for('auth.login') }}">Login</a>
-            {% endif %}
+
+                        <div class="collapse navbar-toggleable-sm" id="tmNavbar">
+                            <ul class="nav navbar-nav">
+                                {% if g.user %}
+                                    <li class="nav-item active">
+                                        <a href="{{ url_for('blog.index') }}">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url_for('blog.create') }}">Create</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url_for('auth.logout') }}">Logout</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p>Logged in as {{ g.user.username }}</p>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a href="{{ url_for('auth.register') }}">Register</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url_for('auth.login') }}">Login</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
         </div>
     </nav>
 
