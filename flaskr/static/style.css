@@ -4,6 +4,8 @@ body {
 	font-size: 18px;
 	font-weight: 300;
 	overflow-x: hidden;
+	background-image: url('images/tm-home-img.jpg');
+        background-size: cover;
 }
 
 a, button { transition: all 0.3s ease; }
