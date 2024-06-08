@@ -137,7 +137,7 @@ button:hover {
 
 .card {
   transition: transform 0.2s ease-in-out;
-  max-width: 100%;
+  max-width: 90%;
 }
 
 .card:hover {
@@ -145,7 +145,7 @@ button:hover {
 }
 
 .card-img-top {
-  height: 120px;  /* Adjust this value to change image height */
+  height: 100px;  /* Adjust this value to change image height */
   object-fit: cover;
 }
 
