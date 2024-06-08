@@ -129,40 +129,56 @@ button:hover {
     padding: 20px;
 }
 
+.latest-articles {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #343a40;
+}
+
 .card {
-    margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
-    transition: box-shadow 0.3s ease;
-}
-
-.card-header {
-    border-bottom: 1px solid #ddd;
-    padding: 20px;
-}
-
-.card-body {
-    padding: 20px;
+  transition: transform 0.2s ease-in-out;
+  max-width: 100%;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  height: 120px;  /* Adjust this value to change image height */
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 10px;
 }
 
 .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .card-text {
-    color: #666;
+  font-size: 0.8rem;
+  color: #6c757d;
 }
 
-.text-muted {
-    color: #999;
+.btn-group .btn {
+  margin-right: 5px;
 }
 
+.btn-group form {
+  display: inline;
+}
+
+small.text-muted {
+  display: block;
+  margin-top: 10px;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
 .form-group {
     margin-bottom: 20px;
 }
