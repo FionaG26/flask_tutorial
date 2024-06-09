@@ -1,9 +1,11 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 )
 from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
+import os
+import json
 
 bp = Blueprint('blog', __name__)
 
@@ -62,12 +64,12 @@ def create():
             )
             db.commit()
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
-            return redirect(url_for('article', article_id=article_id))
+            return redirect(url_for('blog.article', article_id=article_id))
 
-    return render_template('create.html')
+    return render_template('blog/create.html')
 
 # Autosave route
-@app.route('/autosave', methods=['POST'])
+@bp.route('/autosave', methods=['POST'])
 def autosave():
     data = request.form.to_dict()
     with open('draft.json', 'w') as f:
@@ -75,7 +77,7 @@ def autosave():
     return jsonify({'status': 'success'})
 
 # Route for individual article view
-@app.route('/article/<int:article_id>')
+@bp.route('/article/<int:article_id>')
 def article(article_id):
     db = get_db()
     article = db.execute(
@@ -85,16 +87,15 @@ def article(article_id):
     
     if article is None:
         flash('Article not found')
-        return redirect(url_for('home'))
+        return redirect(url_for('blog.home'))
 
-    return render_template('article.html', article=article)
+    return render_template('blog/article.html', article=article)
 
 
-
-@app.route('/preview', methods=['POST'])
+@bp.route('/preview', methods=['POST'])
 def preview():
     data = request.form.to_dict()
-    return render_template('preview.html', data=data)
+    return render_template('blog/preview.html', data=data)
 
 def get_post(id, check_author=True):
     post = get_db().execute(
