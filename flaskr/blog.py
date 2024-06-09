@@ -75,12 +75,17 @@ def create():
         if error is not None:
             flash(error)
         else:
+            image_url = None
             if image and image.filename != '':
-                image_path = os.path.join('static/uploads', image.filename)
+                # Ensure the uploads directory exists
+                uploads_dir = os.path.join(bp.root_path, 'static/uploads')
+                if not os.path.exists(uploads_dir):
+                    os.makedirs(uploads_dir)
+
+                # Save the image to the uploads directory
+                image_path = os.path.join(uploads_dir, image.filename)
                 image.save(image_path)
                 image_url = f'uploads/{image.filename}'
-            else:
-                image_url = None
 
             db = get_db()
             db.execute(
