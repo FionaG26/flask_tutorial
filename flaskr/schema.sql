@@ -13,5 +13,13 @@ CREATE TABLE post (
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     title TEXT NOT NULL,
     body TEXT NOT NULL,
+    summary TEXT,
+    image TEXT,
+    category TEXT,
+    tags TEXT,
+    publish_date TIMESTAMP,
+    seo_title TEXT,
+    seo_description TEXT,
+    seo_keywords TEXT,
     FOREIGN KEY (author_id) REFERENCES user (id)
 );
