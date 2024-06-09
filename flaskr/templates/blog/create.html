@@ -11,7 +11,7 @@
                     <h2>Create a New Article</h2>
                 </div>
                 <div class="card-body">
-                    <form method="post" enctype="multipart/form-data">
+                    <form id="articleForm" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" name="title" required>
@@ -32,10 +32,10 @@
                             <label for="category">Category</label>
                             <select class="form-control" id="category" name="category">
                                 <option value="python">Python</option>
-                                <option value="java">JavaScript</option>
-                                <option value="C">C</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="c">C</option>
                                 <option value="flutter">Flutter</option>
-                                <option value="blockchain">Solidity</option>
+                                <option value="solidity">Solidity</option>
                                 <!-- Add more categories as needed -->
                             </select>
                         </div>
@@ -67,6 +67,14 @@
                     </form>
                 </div>
             </div>
+            <div class="mt-4">
+                <h3>Share this article</h3>
+                <div class="social-sharing">
+                    <a href="#" onclick="shareOnFacebook()" class="btn btn-primary">Share on Facebook</a>
+                    <a href="#" onclick="shareOnTwitter()" class="btn btn-info">Share on Twitter</a>
+                    <a href="#" onclick="shareOnLinkedIn()" class="btn btn-primary">Share on LinkedIn</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -77,9 +85,53 @@
 <script>
     CKEDITOR.replace('body');
 
+    // Autosave functionality
+    function autosave() {
+        let formData = new FormData(document.getElementById('articleForm'));
+        fetch('/autosave', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+          .then(data => console.log(data));
+    }
+
+    // Call autosave every 30 seconds
+    setInterval(autosave, 30000);
+
+    // Preview functionality
     function previewArticle() {
-        // Implement preview functionality
-        alert('Preview function is not implemented yet.');
+        let formData = new FormData(document.getElementById('articleForm'));
+        fetch('/preview', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text())
+          .then(data => {
+            let previewWindow = window.open('', '_blank');
+            previewWindow.document.open();
+            previewWindow.document.write(data);
+            previewWindow.document.close();
+        });
+    }
+
+    // Ensure form does not autosave on submit
+    document.getElementById('articleForm').addEventListener('submit', function() {
+        clearInterval(autosave);
+    });
+
+    // Social sharing function
+    function shareOnFacebook() {
+        let articleURL = window.location.href;
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(articleURL), '_blank');
+    }
+
+    function shareOnTwitter() {
+        let articleURL = window.location.href;
+        window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(articleURL) + '&text=Check%20out%20my%20new%20blog%20post!', '_blank');
+    }
+
+    function shareOnLinkedIn() {
+        let articleURL = window.location.href;
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(articleURL), '_blank');
     }
 </script>
 {% endblock %}
