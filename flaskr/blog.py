@@ -109,35 +109,8 @@ def article(article_id):
         flash('Article not found')
         return redirect(url_for('blog.index'))
 
-    # Initialize publish_date_datepart and publish_date_timepart
-    publish_date_datepart = None
-    publish_date_timepart = None
+    return render_template('blog/view.html', article=article)
 
-    # Splitting the publish_date into date and time parts if it's not None
-    if article['publish_date']:
-        publish_date_parts = article['publish_date'].split(' ')
-        if len(publish_date_parts) == 2:
-            publish_date_datepart, publish_date_timepart = publish_date_parts
-
-    # Create a dictionary to hold the article data
-    article_dict = {
-        'id': article['id'],
-        'title': article['title'],
-        'body': article['body'],
-        'summary': article['summary'],
-        'image': article['image'],
-        'category': article['category'],
-        'tags': article['tags'],
-        'publish_date_datepart': publish_date_datepart,
-        'publish_date_timepart': publish_date_timepart,
-        'seo_title': article['seo_title'],
-        'seo_description': article['seo_description'],
-        'seo_keywords': article['seo_keywords'],
-        'created': article['created'],
-        'author_id': article['author_id']
-    }
-
-    return render_template('blog/view.html', article=article_dict)
 
 @bp.route('/preview', methods=['POST'])
 def preview():
