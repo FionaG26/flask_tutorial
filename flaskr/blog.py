@@ -102,13 +102,38 @@ def article(article_id):
     db = get_db()
     article = db.execute(
         'SELECT id, title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, created, author_id '
-        'FROM post WHERE id = ?', (article_id,)).fetchone()
+        'FROM post WHERE id = ?', (article_id,)
+    ).fetchone()
 
     if article is None:
         flash('Article not found')
         return redirect(url_for('blog.index'))
 
-    return render_template('blog/article.html', article=article)
+    # Splitting the publish_date into date and time parts
+    publish_date = None
+    if article['publish_date']:
+        publish_date = article['publish_date'].split(' ')
+
+    # Update the article dictionary to include the split publish_date
+    article_dict = {
+        'id': article['id'],
+        'title': article['title'],
+        'body': article['body'],
+        'summary': article['summary'],
+        'image': article['image'],
+        'category': article['category'],
+        'tags': article['tags'],
+        'publish_date_datepart': publish_date[0] if publish_date else None,
+        'publish_date_timepart': publish_date[1] if publish_date else None,
+        'seo_title': article['seo_title'],
+        'seo_description': article['seo_description'],
+        'seo_keywords': article['seo_keywords'],
+        'created': article['created'],
+        'author_id': article['author_id']
+    }
+
+    return render_template('blog/article.html', article=article_dict)
+
 
 
 @bp.route('/preview', methods=['POST'])
