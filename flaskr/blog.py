@@ -88,15 +88,17 @@ def autosave():
 def article(article_id):
     db = get_db()
     article = db.execute(
-        'SELECT * FROM post WHERE id = ?',
+        'SELECT id, title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, created, author_id '
+        'FROM post WHERE id = ?',
         (article_id,)
     ).fetchone()
 
     if article is None:
         flash('Article not found')
-        return redirect(url_for('blog.home'))
+        return redirect(url_for('blog.index'))
 
     return render_template('blog/article.html', article=article)
+
 
 @bp.route('/preview', methods=['POST'])
 def preview():
