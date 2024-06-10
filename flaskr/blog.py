@@ -44,6 +44,13 @@ def create():
         if not body:
             error = 'Body is required.'
 
+        if publish_date:
+            try:
+                # Validate the publish_date format
+                datetime.datetime.strptime(publish_date, '%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                error = 'Invalid date format for publish date. Use YYYY-MM-DD HH:MM:SS.'
+
         if error is not None:
             flash(error)
         else:
@@ -53,9 +60,11 @@ def create():
                 if not os.path.exists(uploads_dir):
                     os.makedirs(uploads_dir)
 
-                image_path = os.path.join(uploads_dir, image.filename)
+                # Use secure_filename to prevent directory traversal attacks
+                filename = secure_filename(image.filename)
+                image_path = os.path.join(uploads_dir, filename)
                 image.save(image_path)
-                image_url = f'uploads/{image.filename}'
+                image_url = f'uploads/{filename}'
 
             db = get_db()
             db.execute(
@@ -65,9 +74,8 @@ def create():
             )
             db.commit()
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
-            return redirect(url_for('blog.article', article_id=article_id))
-
-    return render_template('blog/create.html')
+            return redirect(url_for('blog.article', id=article_id))
+    return render_template('create.html')
 
 @bp.route('/autosave', methods=['POST'])
 def autosave():
