@@ -20,10 +20,13 @@ def home():
 @bp.route('/')
 def index():
     db = get_db()
+    # Fetch articles that are published (i.e., publish_date is not null and before or equal to the current datetime)
     posts = db.execute(
         'SELECT p.id, title, summary, created, author_id, username '
         'FROM post p JOIN user u ON p.author_id = u.id '
-        'ORDER BY created DESC'
+        'WHERE publish_date IS NOT NULL AND publish_date <= ? ' 
+        'ORDER BY created DESC',
+        (datetime.now(),)
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
