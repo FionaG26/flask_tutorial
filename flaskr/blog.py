@@ -1,4 +1,5 @@
 import os
+import json
 from datetime import datetime
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
@@ -7,7 +8,6 @@ from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
 from flaskr.auth import login_required
 from flaskr.db import get_db
-import json
 
 bp = Blueprint('blog', __name__, template_folder='templates')
 
@@ -20,7 +20,6 @@ def home():
 @bp.route('/')
 def index():
     db = get_db()
-    # Fetch articles that are published (i.e., publish_date is not null and before or equal to the current datetime)
     posts = db.execute(
         'SELECT p.id, title, summary, created, author_id, username '
         'FROM post p JOIN user u ON p.author_id = u.id '
@@ -49,15 +48,15 @@ def create():
 
         if not title:
             error = 'Title is required.'
-        if not body:
+        elif not body:
             error = 'Body is required.'
-
-        if publish_date:
+        elif publish_date:
             try:
                 publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
+                return render_template('blog/index.html')  # Adjust indentation here
         else:
             image_url = None
             if image and image.filename != '':
@@ -87,8 +86,10 @@ def create():
                  g.user['id']))
             db.commit()
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
-           return redirect(url_for('blog.article', article_id=article_id))
-    return render_template('blog/create.html')
+            return redirect(url_for('blog.article', article_id=article_id))
+
+    return render_template('blog/index.html')
+
 
 @bp.route('/autosave', methods=['POST'])
 def autosave():
@@ -111,12 +112,6 @@ def article(article_id):
         return redirect(url_for('blog.index'))
 
     return render_template('blog/view.html', article=article)
-
-
-@bp.route('/preview', methods=['POST'])
-def preview():
-    data = request.form.to_dict()
-    return render_template('blog/preview.html', data=data)
 
 
 def get_post(id, check_author=True):
@@ -156,15 +151,15 @@ def update(id):
 
         if not title:
             error = 'Title is required.'
-        if not body:
+        elif not body:
             error = 'Body is required.'
-
-        if publish_date:
+        elif publish_date:
             try:
                 publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
+                return render_template('blog/update.html', post=post)  # Adjust indentation here
         else:
             image_url = post['image']
             if image and image.filename != '':
