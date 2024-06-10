@@ -6,8 +6,9 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 import json
+import datetime
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('blog', __name__, template_folder='templates')
 
 @bp.route('/home')
 def home():
@@ -75,7 +76,7 @@ def create():
             db.commit()
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
             return redirect(url_for('blog.article', id=article_id))
-    return render_template('create.html')
+    return render_template('blog/create.html')
 
 @bp.route('/autosave', methods=['POST'])
 def autosave():
