@@ -88,6 +88,7 @@ def create():
             db.commit()
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
             return redirect(url_for('blog.article', article_id=article_id))
+return render_template('blog/index.html')
 
 
 @bp.route('/autosave', methods=['POST'])
