@@ -1,36 +1,10 @@
 import os
-from flask import Flask
-from . import db
-from . import auth, blog
-
-def create_app():
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-    )
-
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
-
-    db.init_app(app)
-
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(blog.bp)
-    app.add_url_rule('/', endpoint='index')
-
-    return app
-
-
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 )
 from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
-import os
 import json
 
 bp = Blueprint('blog', __name__)
@@ -38,18 +12,16 @@ bp = Blueprint('blog', __name__)
 @bp.route('/home')
 def home():
     return render_template('base.html')
-    
 
 @bp.route('/')
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' ORDER BY created DESC'
+        'SELECT p.id, title, summary, created, author_id, username '
+        'FROM post p JOIN user u ON p.author_id = u.id '
+        'ORDER BY created DESC'
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
-
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -77,20 +49,18 @@ def create():
         else:
             image_url = None
             if image and image.filename != '':
-                # Ensure the uploads directory exists
                 uploads_dir = os.path.join(bp.root_path, 'static/uploads')
                 if not os.path.exists(uploads_dir):
                     os.makedirs(uploads_dir)
 
-                # Save the image to the uploads directory
                 image_path = os.path.join(uploads_dir, image.filename)
                 image.save(image_path)
                 image_url = f'uploads/{image.filename}'
 
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, author_id)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                'INSERT INTO post (title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, author_id) '
+                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 (title, body, summary, image_url, category, tags, publish_date, seo_title, seo_description, seo_keywords, g.user['id'])
             )
             db.commit()
@@ -99,7 +69,6 @@ def create():
 
     return render_template('blog/create.html')
 
-# Autosave route
 @bp.route('/autosave', methods=['POST'])
 def autosave():
     data = request.form.to_dict()
@@ -107,7 +76,6 @@ def autosave():
         json.dump(data, f)
     return jsonify({'status': 'success'})
 
-# Route for individual article view
 @bp.route('/article/<int:article_id>')
 def article(article_id):
     db = get_db()
@@ -115,13 +83,12 @@ def article(article_id):
         'SELECT * FROM post WHERE id = ?',
         (article_id,)
     ).fetchone()
-    
+
     if article is None:
         flash('Article not found')
         return redirect(url_for('blog.home'))
 
     return render_template('blog/article.html', article=article)
-
 
 @bp.route('/preview', methods=['POST'])
 def preview():
@@ -130,9 +97,9 @@ def preview():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' WHERE p.id = ?',
+        'SELECT p.id, title, body, created, author_id, username '
+        'FROM post p JOIN user u ON p.author_id = u.id '
+        'WHERE p.id = ?',
         (id,)
     ).fetchone()
 
@@ -143,7 +110,6 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
-
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
@@ -163,8 +129,8 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, body = ?'
-                ' WHERE id = ?',
+                'UPDATE post SET title = ?, body = ? '
+                'WHERE id = ?',
                 (title, body, id)
             )
             db.commit()
