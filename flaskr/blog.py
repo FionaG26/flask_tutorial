@@ -20,11 +20,6 @@ def home():
 @bp.route('/')
 def index():
     db = get_db()
-<<<<<<< HEAD
-    # Fetch articles that are published (i.e., publish_date is not null and
-    # before or equal to the current datetime)
-=======
->>>>>>> 53cfde4047eb05f62a099e5584b078e0f461c9d7
     posts = db.execute(
         'SELECT p.id, title, summary, created, author_id, username '
         'FROM post p JOIN user u ON p.author_id = u.id '
