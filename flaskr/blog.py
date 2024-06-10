@@ -132,7 +132,7 @@ def article(article_id):
         'author_id': article['author_id']
     }
 
-    return render_template('blog/article.html', article=article_dict)
+    return render_template('blog/view.html', article=article_dict)
 
 
 
