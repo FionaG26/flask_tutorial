@@ -2,9 +2,8 @@ import os
 import json
 from datetime import datetime
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
+    Blueprint, flash, g, redirect, render_template, request, url_for, jsonify, abort
 )
-from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
 from flaskr.auth import login_required
 from flaskr.db import get_db
@@ -56,7 +55,7 @@ def create():
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
-                return render_template('blog/index.html')  # Adjust indentation here
+                return render_template('blog/create.html')
         else:
             image_url = None
             if image and image.filename != '':
@@ -93,10 +92,13 @@ def create():
 
 @bp.route('/autosave', methods=['POST'])
 def autosave():
-    data = request.form.to_dict()
-    with open('draft.json', 'w') as f:
-        json.dump(data, f)
-    return jsonify({'status': 'success'})
+    try:
+        data = request.form.to_dict()
+        with open('draft.json', 'w') as f:
+            json.dump(data, f)
+        return jsonify({'status': 'success'})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
 @bp.route('/article/<int:article_id>')
@@ -108,8 +110,7 @@ def article(article_id):
     ).fetchone()
 
     if article is None:
-        flash('Article not found')
-        return redirect(url_for('blog.index'))
+        abort(404)
 
     return render_template('blog/view.html', article=article)
 
@@ -159,7 +160,7 @@ def update(id):
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
-                return render_template('blog/update.html', post=post)  # Adjust indentation here
+                return render_template('blog/update.html', post=post)
         else:
             image_url = post['image']
             if image and image.filename != '':
