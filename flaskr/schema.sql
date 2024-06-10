@@ -17,7 +17,7 @@ CREATE TABLE post (
     image TEXT,
     category TEXT,
     tags TEXT,
-    publish_date TIMESTAMP,
+    publish_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Ensure a default value
     seo_title TEXT,
     seo_description TEXT,
     seo_keywords TEXT,
