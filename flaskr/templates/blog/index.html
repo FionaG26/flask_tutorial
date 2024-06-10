@@ -4,16 +4,17 @@
 {% block title %}Latest Articles{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1>Articles</h1>
-            <hr>
-            {% for post in posts %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2>{{ post.title }}</h2>
-                    <p class="card-text">{{ post.summary }}</p>
+<div class="row">
+    {% for post in posts %}
+      <!-- First Card for Each Post -->
+      <div class="col-md-3">
+        <div class="card mb-4">
+          <img src="{{ url_for('static', filename='images/image.png') }}" class="card-img-top" alt="Post Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.body[:100] }}...</p>
+            <small class="text-muted">by {{ post.username }} on {{ post.created }}</small>
+            <div class="d-flex justify-content-between align-items-center mt-3">
                     <a href="{{ url_for('blog.article', article_id=post.id) }}" class="btn btn-primary">Read More</a>
                     {% if g.user and g.user['id'] == post.author_id %}
                     <a href="{{ url_for('blog.update', id=post.id) }}" class="btn btn-secondary">Edit</a>
