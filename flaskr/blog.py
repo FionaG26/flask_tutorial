@@ -1,5 +1,5 @@
 import os
-import datetime
+from datetime import datetime
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 )
@@ -51,11 +51,10 @@ def create():
 
         if publish_date:
             try:
-                publish_datetime = datetime.fromisoformat(
-                    publish_date.replace('T', ' '))
+                publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
-            flash(error)
+                flash(error)
         else:
             image_url = None
             if image and image.filename != '':
@@ -78,7 +77,7 @@ def create():
                  image_url,
                  category,
                  tags,
-                 publish_date,
+                 publish_datetime,
                  seo_title,
                  seo_description,
                  seo_keywords,
@@ -160,8 +159,7 @@ def update(id):
 
         if publish_date:
             try:
-                publish_datetime = datetime.fromisoformat(
-                    publish_date.replace('T', ' '))
+                publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
@@ -187,7 +185,7 @@ def update(id):
                  image_url,
                  category,
                  tags,
-                 publish_date,
+                 publish_datetime,
                  seo_title,
                  seo_description,
                  seo_keywords,
