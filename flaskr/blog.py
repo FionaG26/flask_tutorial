@@ -46,13 +46,11 @@ def create():
         if not body:
             error = 'Body is required.'
 
-        if publish_date:
+       if publish_date:
             try:
-                datetime.datetime.strptime(publish_date, '%Y-%m-%d %H:%M:%S')
+                publish_datetime = datetime.fromisoformat(publish_date.replace('T', ' '))
             except ValueError:
-                error = 'Invalid date format for publish date. Use YYYY-MM-DD HH:MM:SS.'
-
-        if error is not None:
+                error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
             flash(error)
         else:
             image_url = None
@@ -146,12 +144,10 @@ def update(id):
 
         if publish_date:
             try:
-                datetime.datetime.strptime(publish_date, '%Y-%m-%d %H:%M:%S')
+                publish_datetime = datetime.fromisoformat(publish_date.replace('T', ' '))
             except ValueError:
-                error = 'Invalid date format for publish date. Use YYYY-MM-DD HH:MM:SS.'
-
-        if error is not None:
-            flash(error)
+                error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
+                flash(error)
         else:
             image_url = post['image']
             if image and image.filename != '':
