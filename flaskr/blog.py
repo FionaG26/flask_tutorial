@@ -26,7 +26,7 @@ def index():
         'ORDER BY created DESC',
         (datetime.now(),)
     ).fetchall()
-    return render_template('index.html', posts=posts)
+    return render_template('blog/index.html', posts=posts)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
