@@ -89,12 +89,10 @@ def create():
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
             return redirect(url_for('blog.article', article_id=article_id))
 
-<<<<<<< HEAD
 
-return render_template('blog/index.html')
-=======
+return render_template('blog/index.html'
             return render_template('blog/index.html')
->>>>>>> 53cfde4047eb05f62a099e5584b078e0f461c9d7
+
 
 
 @bp.route('/autosave', methods=['POST'])
