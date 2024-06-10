@@ -11,9 +11,11 @@ import json
 
 bp = Blueprint('blog', __name__, template_folder='templates')
 
+
 @bp.route('/home')
 def home():
     return render_template('base.html')
+
 
 @bp.route('/')
 def index():
@@ -24,6 +26,7 @@ def index():
         'ORDER BY created DESC'
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
+
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -46,9 +49,10 @@ def create():
         if not body:
             error = 'Body is required.'
 
-       if publish_date:
+        if publish_date:
             try:
-                publish_datetime = datetime.fromisoformat(publish_date.replace('T', ' '))
+                publish_datetime = datetime.fromisoformat(
+                    publish_date.replace('T', ' '))
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
             flash(error)
@@ -68,12 +72,22 @@ def create():
             db.execute(
                 'INSERT INTO post (title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, author_id) '
                 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (title, body, summary, image_url, category, tags, publish_date, seo_title, seo_description, seo_keywords, g.user['id'])
-            )
+                (title,
+                 body,
+                 summary,
+                 image_url,
+                 category,
+                 tags,
+                 publish_date,
+                 seo_title,
+                 seo_description,
+                 seo_keywords,
+                 g.user['id']))
             db.commit()
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
             return redirect(url_for('blog.article', article_id=article_id))
     return render_template('blog/create.html')
+
 
 @bp.route('/autosave', methods=['POST'])
 def autosave():
@@ -82,14 +96,13 @@ def autosave():
         json.dump(data, f)
     return jsonify({'status': 'success'})
 
+
 @bp.route('/article/<int:article_id>')
 def article(article_id):
     db = get_db()
     article = db.execute(
         'SELECT id, title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, created, author_id '
-        'FROM post WHERE id = ?',
-        (article_id,)
-    ).fetchone()
+        'FROM post WHERE id = ?', (article_id,)).fetchone()
 
     if article is None:
         flash('Article not found')
@@ -102,6 +115,7 @@ def article(article_id):
 def preview():
     data = request.form.to_dict()
     return render_template('blog/preview.html', data=data)
+
 
 def get_post(id, check_author=True):
     post = get_db().execute(
@@ -118,6 +132,7 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
+
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
@@ -144,7 +159,8 @@ def update(id):
 
         if publish_date:
             try:
-                publish_datetime = datetime.fromisoformat(publish_date.replace('T', ' '))
+                publish_datetime = datetime.fromisoformat(
+                    publish_date.replace('T', ' '))
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
@@ -164,11 +180,21 @@ def update(id):
             db.execute(
                 'UPDATE post SET title = ?, body = ?, summary = ?, image = ?, category = ?, tags = ?, publish_date = ?, seo_title = ?, seo_description = ?, seo_keywords = ?'
                 'WHERE id = ?',
-                (title, body, summary, image_url, category, tags, publish_date, seo_title, seo_description, seo_keywords, id)
-            )
+                (title,
+                 body,
+                 summary,
+                 image_url,
+                 category,
+                 tags,
+                 publish_date,
+                 seo_title,
+                 seo_description,
+                 seo_keywords,
+                 id))
             db.commit()
             return redirect(url_for('blog.article', article_id=id))
     return render_template('blog/update.html', post=post)
+
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
