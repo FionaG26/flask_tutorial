@@ -23,7 +23,7 @@ def index():
     posts = db.execute(
         'SELECT p.id, title, summary, created, author_id, username '
         'FROM post p JOIN user u ON p.author_id = u.id '
-        'WHERE publish_date IS NOT NULL AND publish_date <= ? '
+        'WHERE publish_date IS NOT NULL AND publish_date <= ? ' 
         'ORDER BY created DESC',
         (datetime.now(),)
     ).fetchall()
@@ -52,8 +52,7 @@ def create():
             error = 'Body is required.'
         elif publish_date:
             try:
-                publish_datetime = datetime.strptime(
-                    publish_date, '%Y-%m-%dT%H:%M')
+                publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
@@ -89,10 +88,7 @@ def create():
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
             return redirect(url_for('blog.article', article_id=article_id))
 
-
-return render_template('blog/index.html'
-            return render_template('blog/index.html')
-
+    return render_template('blog/index.html')
 
 
 @bp.route('/autosave', methods=['POST'])
@@ -108,7 +104,8 @@ def article(article_id):
     db = get_db()
     article = db.execute(
         'SELECT id, title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, created, author_id '
-        'FROM post WHERE id = ?', (article_id,)).fetchone()
+        'FROM post WHERE id = ?', (article_id,)
+    ).fetchone()
 
     if article is None:
         flash('Article not found')
@@ -158,8 +155,7 @@ def update(id):
             error = 'Body is required.'
         elif publish_date:
             try:
-                publish_datetime = datetime.strptime(
-                    publish_date, '%Y-%m-%dT%H:%M')
+                publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
