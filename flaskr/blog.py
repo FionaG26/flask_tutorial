@@ -20,11 +20,12 @@ def home():
 @bp.route('/')
 def index():
     db = get_db()
-    # Fetch articles that are published (i.e., publish_date is not null and before or equal to the current datetime)
+    # Fetch articles that are published (i.e., publish_date is not null and
+    # before or equal to the current datetime)
     posts = db.execute(
         'SELECT p.id, title, summary, created, author_id, username '
         'FROM post p JOIN user u ON p.author_id = u.id '
-        'WHERE publish_date IS NOT NULL AND publish_date <= ? ' 
+        'WHERE publish_date IS NOT NULL AND publish_date <= ? '
         'ORDER BY created DESC',
         (datetime.now(),)
     ).fetchall()
@@ -54,7 +55,8 @@ def create():
 
         if publish_date:
             try:
-                publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
+                publish_datetime = datetime.strptime(
+                    publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
@@ -88,6 +90,8 @@ def create():
             db.commit()
             article_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
             return redirect(url_for('blog.article', article_id=article_id))
+
+
 return render_template('blog/index.html')
 
 
@@ -104,8 +108,7 @@ def article(article_id):
     db = get_db()
     article = db.execute(
         'SELECT id, title, body, summary, image, category, tags, publish_date, seo_title, seo_description, seo_keywords, created, author_id '
-        'FROM post WHERE id = ?', (article_id,)
-    ).fetchone()
+        'FROM post WHERE id = ?', (article_id,)).fetchone()
 
     if article is None:
         flash('Article not found')
@@ -162,7 +165,8 @@ def update(id):
 
         if publish_date:
             try:
-                publish_datetime = datetime.strptime(publish_date, '%Y-%m-%dT%H:%M')
+                publish_datetime = datetime.strptime(
+                    publish_date, '%Y-%m-%dT%H:%M')
             except ValueError:
                 error = 'Invalid date format for publish date. Use YYYY-MM-DDTHH:MM.'
                 flash(error)
